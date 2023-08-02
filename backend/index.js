@@ -6,13 +6,16 @@ const app = express();
 require("dotenv").config();
 const { connection } = require("./config/db");
 const { userRouter } = require("./Router/userRoute");
+const { playlistRouter } = require("./Router/playListRoute");
+const { movieRouter } = require("./Router/movieRoute");
 const { auth } = require("./middleware/auth");
 app.use(express.json());
 app.use(cors());
 app.use("/user", userRouter);
-app.get("/", (req, res) => {
-  res.send("hi");
-});
+app.use("/movies", movieRouter);
+app.use(auth);
+
+app.use("/playlist", playlistRouter);
 
 app.listen(process.env.PORT, async () => {
   try {
