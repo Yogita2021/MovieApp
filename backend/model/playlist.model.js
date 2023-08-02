@@ -6,5 +6,5 @@ const playlistSchema = new mongoose.Schema({
   movies: [{ type: mongoose.Schema.Types.ObjectId, ref: "movie" }],
   userID: [{ type: mongoose.Schema.Types.ObjectId, ref: "user" }],
 });
-const Playlist = mongoose.model("Playlist", playlistSchema);
+const Playlist = mongoose.model("playlist", playlistSchema);
 module.exports = { Playlist };
