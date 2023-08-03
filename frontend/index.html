@@ -5,6 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Movie-App</title>
     <link rel="stylesheet" href="./styles/index.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css"
+      integrity="sha512-SzlrxWUlpfuzQ+pcUCosxcglQRNAq/DZjVsC0lE40xsADsfeQoEypE+enwcOiGjk/bSuGGKHEyjSoQ1zVisanQ=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
   </head>
   <body>
     <header>
@@ -12,14 +19,30 @@
         <div>
           <a href="index.html"> MovieApp</a>
         </div>
-        <div>
-          <form action="" id="movieSeacrhForm">
-            <input type="text" id="search" placeholder="Search for movies" />
-            <input type="submit" />
-          </form>
-        </div>
-        <div>
-          <button>SignIn</button>
+
+        <div id="links">
+          <ul>
+            <div>
+              <form action="" id="movieSeacrhForm">
+                <input
+                  type="text"
+                  id="search"
+                  placeholder="Search for movies"
+                />
+                <input type="submit" />
+              </form>
+            </div>
+            <div class="dropdown">
+              <a href="./htmlFiles/login.html" id="userLogin"
+                ><button id="Login">Login</button></a
+              >
+            </div>
+            <div>
+              <a id="logout" href=""
+                ><i class="fa-solid fa-right-from-bracket"></i
+              ></a>
+            </div>
+          </ul>
         </div>
       </nav>
       <div id="container"></div>

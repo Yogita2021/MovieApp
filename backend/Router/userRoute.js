@@ -28,18 +28,18 @@ userRouter.post("/login", async (req, res) => {
     let user = await User.findOne({ email });
     if (!user) {
       res.status(201).json({ msg: "Please login First!" });
-    } else {
-      let passCheck = bcrypt.compareSync(password, user.password);
-      if (!passCheck) {
-        res.status(201).json({ msg: "wrong credential" });
-      } else {
-        let payload = { email, userID: user._id };
-        const token = jwt.sign(payload, process.env.Secrete_key, {
-          expiresIn: "8h",
-        });
-        res.status(200).json({ msg: "Login successful !", token: token });
-      }
     }
+    let passCheck = bcrypt.compareSync(password, user.password);
+    if (!passCheck) {
+      res.status(201).json({ msg: "wrong credential" });
+    }
+    let payload = { userName: user.name, userID: user._id };
+    const token = jwt.sign(payload, process.env.Secrete_key, {
+      expiresIn: "8h",
+    });
+    res
+      .status(200)
+      .send({ msg: "Login successful !", token: token, user: user });
   } catch (error) {
     res.status(400).json({ message: error.message });
   }
