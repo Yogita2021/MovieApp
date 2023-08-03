@@ -9,8 +9,9 @@ const { userRouter } = require("./Router/userRoute");
 const { playlistRouter } = require("./Router/playListRoute");
 const { movieRouter } = require("./Router/movieRoute");
 const { auth } = require("./middleware/auth");
-app.use(express.json());
 app.use(cors());
+app.use(express.json());
+
 app.use("/user", userRouter);
 app.use("/movies", movieRouter);
 app.use(auth);
