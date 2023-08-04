@@ -1,3 +1,28 @@
+// Navbar js
+
+let Login = document.getElementById("Login");
+Login.addEventListener("click", () => {
+  window.location.href = "./htmlFiles/login.html";
+});
+
+let currentuser = localStorage.getItem("token") || "";
+let userDetails = JSON.parse(localStorage.getItem("userDetails")) || "";
+let userLogin = document.getElementById("userLogin");
+
+let logoutBtn = document.getElementById("logout");
+logoutBtn.addEventListener("click", () => {
+  localStorage.removeItem("userDetails");
+  localStorage.removeItem("token");
+  location.href = "../index.html";
+});
+if (userDetails) {
+  userLogin.innerText = userDetails.name;
+
+  logoutBtn.style.visibility = "visible";
+} else {
+  logoutBtn.style.visibility = "hidden";
+}
+
 const url = "http://localhost:8000";
 
 const playlistsContainer = document.getElementById("playlists-container");
@@ -6,11 +31,12 @@ const playlistsContainer = document.getElementById("playlists-container");
 
 const privateBtn = document.getElementById("privateBtn");
 
-privateBtn.addEventListener("click", async function privatePlaylists() {
+privateBtn.addEventListener("click", function privatePlaylists() {
   const token = localStorage.getItem("token");
 
   if (!token) {
     alert("Please log in to view your playlists.");
+    window.location.href = "../htmlFiles/login.html";
     return;
   }
 
@@ -50,8 +76,10 @@ function displayPlaylists(playlists) {
   });
 }
 const publicBtn = document.getElementById("publicBtn");
+// window.onload = viewPublicPlaylists;
 
-publicBtn.addEventListener("click", async function viewPublicPlaylists() {
+publicBtn.addEventListener("click", viewPublicPlaylists);
+function viewPublicPlaylists() {
   fetch(`${url}/playlist/PublicPlaylist`)
     .then((res) => res.json())
     .then((data) => {
@@ -64,4 +92,50 @@ publicBtn.addEventListener("click", async function viewPublicPlaylists() {
       }
     })
     .catch((err) => console.log(err));
-});
+}
+// by default all the movies
+function getAllMovies() {
+  fetch(`http://localhost:8000/movies/`)
+    .then((res) => res.json())
+    .then((data) => {
+      console.log(data);
+
+      ApiData = data.data;
+
+      movieCard(ApiData);
+    })
+    .catch((error) => {
+      console.log(error);
+    });
+}
+
+// window.onload = getAllMovies;
+window.onload = function () {
+  viewPublicPlaylists();
+  getAllMovies();
+};
+
+function movieCard(data) {
+  container.innerHTML = "";
+  data.map((elem) => {
+    console.log(elem);
+    let div = document.createElement("div");
+    div.setAttribute("class", "card");
+    let imgDiv = document.createElement("div");
+    imgDiv.setAttribute("class", "imgDiv");
+    let img = document.createElement("img");
+    img.setAttribute("class", "image");
+    imgDiv.append(img);
+    let pDiv = document.createElement("div");
+    pDiv.setAttribute("class", "pDiv");
+    let date = document.createElement("p");
+    let name = document.createElement("p");
+    pDiv.append(name, date);
+
+    name.innerText = `Title: ${elem.Title}`;
+    img.setAttribute("src", elem.Poster);
+    date.innerText = `Year: ${elem.Year}`;
+    div.append(imgDiv, pDiv, date);
+    container.append(div);
+  });
+}

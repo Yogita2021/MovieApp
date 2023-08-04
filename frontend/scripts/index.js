@@ -67,10 +67,10 @@ function movieCard(data) {
     let name = document.createElement("p");
     pDiv.append(name, date);
     let btn = document.createElement("button");
-    btn.innerText = "View";
+
+    btn.innerText = "Add To playlist";
     btn.addEventListener("click", () => {
-      localStorage.setItem("MovieDetail", JSON.stringify(elem));
-      window.location.href = "./htmlFiles/MovieDetail.html";
+      window.location.href = "./htmlFiles/Playlist.html";
     });
     name.innerText = `Title: ${elem.Title}`;
     img.setAttribute("src", elem.Poster);
@@ -92,6 +92,7 @@ let userLogin = document.getElementById("userLogin");
 let logoutBtn = document.getElementById("logout");
 logoutBtn.addEventListener("click", () => {
   localStorage.removeItem("userDetails");
+  localStorage.removeItem("token");
   location.href = "../index.html";
 });
 if (userDetails) {
@@ -164,3 +165,12 @@ window.onclick = function (event) {
 };
 
 //
+const privateBtn = document.getElementById("privateBtn");
+privateBtn.addEventListener("click", () => {
+  window.location.href = "./htmlFiles/playlist.html";
+});
+
+const publicBtn = document.getElementById("publicBtn");
+publicBtn.addEventListener("click", () => {
+  window.location.href = "./htmlFiles/PublicPlaylist.html";
+});

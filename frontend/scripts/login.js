@@ -22,7 +22,7 @@ form.addEventListener("submit", (e) => {
     .then((data) => {
       console.log(data);
       localStorage.setItem("userDetails", JSON.stringify(data.user));
-      alert(data.msg);
+      // alert(data.msg);
       if (data.msg == "Login successful !") {
         window.location.href = "../index.html";
       }

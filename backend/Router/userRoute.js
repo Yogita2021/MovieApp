@@ -11,6 +11,7 @@ userRouter.post("/register", async (req, res) => {
     const user = await User.findOne({ email });
     if (user) {
       res.status(201).json({ msg: "User already exist !" });
+      return;
     } else {
       const hashPassword = bcrypt.hashSync(password, 8);
       const newUser = new User({ name, email, password: hashPassword });
@@ -19,6 +20,7 @@ userRouter.post("/register", async (req, res) => {
     }
   } catch (error) {
     res.status(400).json({ message: error.message });
+    return;
   }
 });
 
@@ -28,6 +30,7 @@ userRouter.post("/login", async (req, res) => {
     let user = await User.findOne({ email });
     if (!user) {
       res.status(201).json({ msg: "Please login First!" });
+      return;
     }
     let passCheck = bcrypt.compareSync(password, user.password);
     if (!passCheck) {
@@ -43,6 +46,7 @@ userRouter.post("/login", async (req, res) => {
       .send({ msg: "Login successful !", token: token, user: user });
   } catch (error) {
     res.status(400).json({ message: error.message });
+    return;
   }
 });
 

@@ -169,6 +169,20 @@ nav ul {
   border: none;
   cursor: pointer;
 }
+#privateBtn {
+  margin: 20% 10%;
+  padding: 10px;
+  border-radius: 5px;
+  border: none;
+  cursor: pointer;
+}
+#publicBtn {
+  margin: 20% 10%;
+  padding: 10px;
+  border-radius: 5px;
+  border: none;
+  cursor: pointer;
+}
 /* Modal Content */
 .modal-content {
   background-color: #fefefe;

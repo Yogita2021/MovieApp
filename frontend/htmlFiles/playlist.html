@@ -5,13 +5,57 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Playlist-html</title>
     <link rel="stylesheet" href="../styles/playlist.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css"
+      integrity="sha512-SzlrxWUlpfuzQ+pcUCosxcglQRNAq/DZjVsC0lE40xsADsfeQoEypE+enwcOiGjk/bSuGGKHEyjSoQ1zVisanQ=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
   </head>
   <body>
-    <h1>My Playlists</h1>
-    <button id="privateBtn">Private</button>
-    <button id="publicBtn">Public</button>
+    <header>
+      <nav>
+        <div>
+          <a href="index.html"> MovieApp</a>
+        </div>
 
-    <div id="playlists-container"></div>
+        <div id="links">
+          <ul>
+            <div>
+              <form action="" id="movieSeacrhForm">
+                <input
+                  type="text"
+                  id="search"
+                  placeholder="Search for movies"
+                />
+                <input type="submit" />
+              </form>
+            </div>
+            <div>
+              <a href="./htmlFiles/login.html" id="userLogin"
+                ><button id="Login">Login</button></a
+              >
+            </div>
+            <div>
+              <a id="logout" href=""
+                ><i class="fa-solid fa-right-from-bracket"></i
+              ></a>
+            </div>
+          </ul>
+        </div>
+      </nav>
+      <div id="main">
+        <div id="btns-div">
+          <button id="privateBtn">Private Playlist</button>
+          <button id="publicBtn">Public Playlist</button>
+        </div>
+        <div id="second-contaier">
+          <div id="playlists-container"></div>
+          <div id="container"></div>
+        </div>
+      </div>
+    </header>
   </body>
 </html>
 <script src="../scripts/playlist.js"></script>
