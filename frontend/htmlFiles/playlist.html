@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Playlist-html</title>
+    <title>MovieApp</title>
     <link rel="stylesheet" href="../styles/playlist.css" />
     <link
       rel="stylesheet"
@@ -12,50 +12,57 @@
       crossorigin="anonymous"
       referrerpolicy="no-referrer"
     />
+    
+      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/boxicons@latest/css/boxicons.min.css" />
+
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
+
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap" />
   </head>
   <body>
+    <!-- --------------------Navbar started-------------------------- -->
     <header>
-      <nav>
-        <div>
-          <a href="index.html"> MovieApp</a>
-        </div>
 
-        <div id="links">
-          <ul>
-            <div>
-              <form action="" id="movieSeacrhForm">
+      <a href="../index.html" class="logo">MovieApp</a>
+       
+        <div class="bx bx-menu" id="menu-icon"></div>
+
+          <ul class="navbar" id="nav-menu">
+
+              <li> <form action="" id="movieSeacrhForm">
                 <input
                   type="text"
-                  id="search"
-                  placeholder="Search for movies"
-                />
+                  id="search" placeholder="Search for movies" />
                 <input type="submit" />
-              </form>
-            </div>
-            <div>
-              <a href="./htmlFiles/login.html" id="userLogin"
-                ><button id="Login">Login</button></a
-              >
-            </div>
-            <div>
-              <a id="logout" href=""
-                ><i class="fa-solid fa-right-from-bracket"></i
-              ></a>
-            </div>
-          </ul>
-        </div>
-      </nav>
-      <div id="main">
-        <div id="btns-div">
-          <button id="privateBtn">Private Playlist</button>
-          <button id="publicBtn">Public Playlist</button>
-        </div>
-        <div id="second-contaier">
-          <div id="playlists-container"></div>
-          <div id="container"></div>
-        </div>
-      </div>
+                   </form>
+              </li>
+          
+              <li> <a href="./htmlFiles/login.html" id="userLogin"
+                ><button id="Login">Login</button></a>
+              </li>
+        
+               <li><a id="logout" href=""><i class="fa-solid fa-right-from-bracket"></i></a>
+              </li>
+            
+         </div>
+
+       </ul>
+
     </header>
+
+    <!-- --------------------Container started--------------------------- -->
+    <div id="main">
+      <div id="btns-div">
+        <button id="privateBtn">Private Playlist</button>
+        <button id="publicBtn">Public Playlist</button>
+      </div>
+
+      <div id="second-contaier">
+        <div id="playlists-container"></div>
+        <div id="container"></div>
+      </div>
+    </div>
   </body>
 </html>
+<!-- ----------------------script linked here----------------------------------------- -->
 <script src="../scripts/playlist.js"></script>

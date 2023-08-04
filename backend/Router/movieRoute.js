@@ -1,7 +1,9 @@
 const express = require("express");
+
 const movieRouter = express.Router();
+
 const { Movie } = require("../model/movie.model");
-// const fetch = require("node-fetch");
+
 require("dotenv").config();
 
 movieRouter.post("/search", async (req, res) => {

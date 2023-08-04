@@ -1,17 +1,24 @@
-const url = "http://localhost:8000";
-const login_Url = `${url}/user/login`;
+// ******************************baseUrl**********************************************/
+
+const Base_Url = "http://localhost:8000";
+
+// ***************************Login functionality***************************************/
 
 const form = document.querySelector("form");
+
 let email = document.getElementById("email");
+
 let password = document.getElementById("password");
+
 form.addEventListener("submit", (e) => {
   e.preventDefault();
+
   let user = {
     email: email.value,
     password: password.value,
   };
 
-  fetch(`${login_Url}`, {
+  fetch(`${Base_Url}/user/login`, {
     method: "POST",
     headers: {
       "Content-type": "application/json",
@@ -22,6 +29,7 @@ form.addEventListener("submit", (e) => {
     .then((data) => {
       console.log(data);
       localStorage.setItem("userDetails", JSON.stringify(data.user));
+
       // alert(data.msg);
       if (data.msg == "Login successful !") {
         window.location.href = "../index.html";

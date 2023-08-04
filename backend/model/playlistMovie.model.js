@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+
 const playlistMoviesSchema = new mongoose.Schema({
   Poster: { type: String },
   Title: { type: String, required: true },

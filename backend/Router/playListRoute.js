@@ -27,20 +27,6 @@ playlistRouter.post("/create", auth, async (req, res) => {
   }
 });
 
-// playlistRouter.get("/:userID", async (req, res) => {
-//   try {
-//     const { userID } = req.params;
-//     const playlist = await Playlist.findBy({ userID: userID });
-//     if (!playlist) {
-//       res.status(201).json({ msg: "playlist not found" });
-//     } else {
-//       res.status(200).json({ msg: "playlist is available", playlist });
-//     }
-//   } catch (error) {
-//     res.status(400).json({ message: error.message });
-//   }
-// });
-
 // for adding movie to the playlist
 
 playlistRouter.post("/addMovie/:playlistID", auth, async (req, res) => {
