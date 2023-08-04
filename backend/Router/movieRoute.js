@@ -3,7 +3,7 @@ const movieRouter = express.Router();
 const { Movie } = require("../model/movie.model");
 // const fetch = require("node-fetch");
 require("dotenv").config();
-const apikey = "ff8ccd3f";
+
 movieRouter.post("/search", async (req, res) => {
   const { query } = req.body;
   try {
@@ -12,9 +12,18 @@ movieRouter.post("/search", async (req, res) => {
       `https://www.omdbapi.com/?s=${query}&apikey=${process.env.Api_Key}`
     );
 
+    if (!apidata.ok) {
+      throw new Error("Failed to fetch data from the OMDB API.");
+    }
     const data = await apidata.json();
-    // console.log(data);
-    res.status(200).json({ data: data.Search });
+    const searchResults =
+      data.Search && Array.isArray(data.Search)
+        ? data.Search.filter((movie) => {
+            return movie.Title.toLowerCase().includes(query.toLowerCase());
+          })
+        : [];
+
+    res.status(200).json({ data: searchResults });
   } catch (error) {
     res.json({ message: error.message });
   }

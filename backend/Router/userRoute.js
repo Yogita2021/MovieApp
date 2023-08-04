@@ -32,6 +32,7 @@ userRouter.post("/login", async (req, res) => {
     let passCheck = bcrypt.compareSync(password, user.password);
     if (!passCheck) {
       res.status(201).json({ msg: "wrong credential" });
+      return;
     }
     let payload = { userName: user.name, userID: user._id };
     const token = jwt.sign(payload, process.env.Secrete_key, {

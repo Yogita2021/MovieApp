@@ -21,7 +21,8 @@ movieSeacrhForm.addEventListener("submit", async (e) => {
       })
         .then((res) => res.json())
         .then((data) => {
-          console.log(data.data);
+          // console.log(data);
+          // console.log(data.data);
           ApiData = data.data;
 
           movieCard(ApiData);
@@ -37,6 +38,7 @@ function getAllMovies() {
     .then((res) => res.json())
     .then((data) => {
       console.log(data);
+
       ApiData = data.data;
 
       movieCard(ApiData);
@@ -45,6 +47,7 @@ function getAllMovies() {
       console.log(error);
     });
 }
+
 window.onload = getAllMovies;
 
 function movieCard(data) {
@@ -93,17 +96,71 @@ logoutBtn.addEventListener("click", () => {
 });
 if (userDetails) {
   userLogin.innerText = userDetails.name;
+
   logoutBtn.style.visibility = "visible";
 } else {
   logoutBtn.style.visibility = "hidden";
 }
 
-let header = document.querySelector("header");
-let menu = document.querySelector("#menu-icon");
+// ////modal///
+const createPlaylistBtn = document.getElementById("myBtn");
 
-menu.onclick = () => {
-  navbar.classList.toggle("active");
+// Function to create a playlist
+let playlistName = document.getElementById("playlistName");
+let playlistType = document.getElementById("playlistType");
+let playlistform = document.getElementById("playlistForm");
+console.log(playlistform);
+
+playlistform.addEventListener("submit", (e) => {
+  e.preventDefault();
+  const token = localStorage.getItem("token");
+
+  if (!token) {
+    alert("Please log in to create a playlist.");
+    return;
+  }
+  let obj = { name: playlistName.value, type: playlistType.value };
+  console.log(obj);
+
+  fetch("http://localhost:8000/playlist/create", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      authorization: token,
+    },
+    // Replace this with actual playlist data (e.g., name and type)
+    body: JSON.stringify(obj),
+  })
+    .then((res) => res.json())
+    .then((data) => {
+      if (!data.isErrer) {
+        alert("Playlist created successfully!");
+        console.log(data);
+        console.log("New Playlist:", data.playlist);
+      } else {
+        alert("Failed to create playlist.");
+      }
+    });
+});
+
+var modal = document.getElementById("myModal");
+
+var btn = document.getElementById("myBtn");
+
+var span = document.getElementsByClassName("close")[0];
+
+btn.onclick = function () {
+  modal.style.display = "block";
 };
-window.onscroll = () => {
-  navbar.classList.remove("active");
+
+span.onclick = function () {
+  modal.style.display = "none";
 };
+
+window.onclick = function (event) {
+  if (event.target == modal) {
+    modal.style.display = "none";
+  }
+};
+
+//

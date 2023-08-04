@@ -14,7 +14,7 @@ app.use(express.json());
 
 app.use("/user", userRouter);
 app.use("/movies", movieRouter);
-app.use(auth);
+// app.use(auth);
 
 app.use("/playlist", playlistRouter);
 

@@ -61,6 +61,10 @@ nav ul {
   gap: 20px;
   display: flex;
 }
+#main-cotainer {
+  /* border: 1px solid black; */
+  display: flex;
+}
 
 #container {
   width: 90%;
@@ -70,7 +74,7 @@ nav ul {
   grid-template-columns: repeat(5, 1fr);
   grid-template-rows: auto;
   gap: 20px;
-  padding: 20px;
+  padding: 10px;
 }
 #container > div {
   /* height: 530px; */
@@ -111,6 +115,84 @@ nav ul {
   border: none;
 }
 
+/* modal */
+.modal {
+  /* border: 1px solid red; */
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  /* z-index: 1; */
+  padding-top: 100px; /* Location of the box */
+  left: 0;
+  top: 0;
+  width: 20%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0, 0, 0); /* Fallback color */
+  background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
+}
+.modal-create {
+  /* border: 1px rgb(98, 98, 253); */
+  width: 10%;
+  background: rgb(98, 98, 253);
+}
+#playlistForm {
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px,
+    rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
+  margin-top: 30px;
+  padding: 20px;
+}
+
+#playlistForm label {
+  margin-top: 30px;
+}
+#playlistName {
+  margin-bottom: 20px;
+}
+#playlistType {
+  margin-bottom: 20px;
+  width: 80%;
+  height: 20px;
+}
+#submitBtn {
+  padding: 10px 15px;
+  border-radius: 5px;
+  border: none;
+  background-color: green;
+  color: white;
+  margin: -25% 25%;
+  margin-top: 20px;
+}
+#myBtn {
+  margin: 20% 10%;
+  padding: 10px;
+  border-radius: 5px;
+  border: none;
+  cursor: pointer;
+}
+/* Modal Content */
+.modal-content {
+  background-color: #fefefe;
+  margin: auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 80%;
+}
+
+/* The Close Button */
+.close {
+  color: #aaaaaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: #000;
+  text-decoration: none;
+  cursor: pointer;
+}
+
 @media (max-width: 768px) {
   nav {
     display: flex;
@@ -128,5 +210,13 @@ nav ul {
   }
   #container > div {
     height: 450px;
+  }
+  #main-cotainer {
+    /* border: 1px solid black; */
+    display: flex;
+    flex-direction: column;
+  }
+  .modal {
+    height: 50%;
   }
 }

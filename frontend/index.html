@@ -32,7 +32,7 @@
                 <input type="submit" />
               </form>
             </div>
-            <div class="dropdown">
+            <div>
               <a href="./htmlFiles/login.html" id="userLogin"
                 ><button id="Login">Login</button></a
               >
@@ -45,7 +45,42 @@
           </ul>
         </div>
       </nav>
-      <div id="container"></div>
+      <div id="main-cotainer">
+        <div class="modal-create">
+          <!-- Trigger/Open The Modal -->
+          <button id="myBtn">Create Playlist</button>
+
+          <!-- The Modal -->
+          <div id="myModal" class="modal">
+            <!-- Modal content -->
+
+            <div class="modal-content">
+              <span class="close">&times;</span>
+              <h2>Create a Playlist</h2>
+              <form id="playlistForm">
+                <label for="playlistName">Playlist Name:</label> <br />
+
+                <input type="text" id="playlistName" required /> <br />
+
+                <label for="playlistType">Playlist Type:</label> <br />
+
+                <select id="playlistType" required>
+                  <option value="public">public</option>
+                  <option value="private">private</option>
+                </select>
+                <br />
+
+                <button type="submit" id="submitBtn">Create</button>
+              </form>
+            </div>
+          </div>
+
+          <a href="./htmlFiles/playlist.html"
+            ><button id="myBtn">View Playlist</button></a
+          >
+        </div>
+        <div id="container"></div>
+      </div>
     </header>
   </body>
   <script src="scripts/index.js"></script>
