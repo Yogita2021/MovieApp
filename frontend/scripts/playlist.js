@@ -166,44 +166,56 @@ window.onload = function () {
 };
 
 // ************************************display movie card************************************/
+let errmsgDiv = document.getElementById("errmsgDiv");
+
 function movieCard(data) {
   container.innerHTML = "";
-
-  data.map((elem) => {
-    console.log(elem);
-
+  errmsgDiv.innerHTML = "";
+  if (data.length == 0) {
     let div = document.createElement("div");
-    div.setAttribute("class", "card");
+    div.setAttribute("id", "errMsg");
+    let h1 = document.createElement("h1");
+    h1.setAttribute("id", "errMsgh1");
+    h1.innerText = "Movie Not Found !!!";
+    div.append(h1);
+    errmsgDiv.append(div);
+  } else {
+    data.map((elem) => {
+      console.log(elem);
 
-    let imgDiv = document.createElement("div");
-    imgDiv.setAttribute("class", "imgDiv");
+      let div = document.createElement("div");
+      div.setAttribute("class", "card");
 
-    let img = document.createElement("img");
-    img.setAttribute("class", "image");
-    imgDiv.append(img);
+      let imgDiv = document.createElement("div");
+      imgDiv.setAttribute("class", "imgDiv");
 
-    let pDiv = document.createElement("div");
-    pDiv.setAttribute("class", "pDiv");
+      let img = document.createElement("img");
+      img.setAttribute("class", "image");
+      imgDiv.append(img);
 
-    let date = document.createElement("p");
+      let pDiv = document.createElement("div");
+      pDiv.setAttribute("class", "pDiv");
 
-    let name = document.createElement("p");
+      let date = document.createElement("p");
 
-    pDiv.append(name, date);
+      let name = document.createElement("p");
 
-    let btn = document.createElement("button");
-    btn.innerText = "Watch Now";
+      pDiv.append(name, date);
 
-    name.innerText = `Title: ${elem.Title}`;
+      let btn = document.createElement("button");
+      btn.innerText = "Watch Now";
 
-    img.setAttribute("src", elem.Poster);
+      name.innerText = `Title: ${elem.Title}`;
 
-    date.innerText = `Year: ${elem.Year}`;
+      img.setAttribute("src", elem.Poster);
 
-    div.append(imgDiv, pDiv, date, btn);
+      date.innerText = `Year: ${elem.Year}`;
 
-    container.append(div);
-  });
+      div.append(imgDiv, pDiv, date, btn);
+
+      container.append(div);
+    });
+  }
 }
 
 // *********************************Search movie*********************************************/

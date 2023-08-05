@@ -115,6 +115,12 @@ li {
   width: 60%;
 }
 
+#errMsgh1 {
+  margin-left: 250%;
+
+  margin-top: 100%;
+  margin-bottom: 140%;
+}
 #container > div button {
   padding: 10px 20px;
   border-radius: 10px;
@@ -398,6 +404,11 @@ tr:nth-child(even) {
 
   .image {
     width: 60%;
+  }
+  #errMsgh1 {
+    margin-left: 15%;
+
+    margin-top: 25%;
   }
 
   #container > div button {

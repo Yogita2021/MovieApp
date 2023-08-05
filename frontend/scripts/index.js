@@ -76,48 +76,60 @@ function getAllMovies() {
 window.onload = getAllMovies;
 
 // ****************************************All Card created here*********************************/
+
+let errmsgDiv = document.getElementById("errmsgDiv");
 function movieCard(data) {
   container.innerHTML = "";
-
-  data.map((elem) => {
-    // console.log(elem);
-
+  errmsgDiv.innerHTML = "";
+  if (data.length == 0) {
     let div = document.createElement("div");
-    div.setAttribute("class", "card");
+    div.setAttribute("id", "errMsg");
+    let h1 = document.createElement("h1");
+    h1.setAttribute("id", "errMsgh1");
+    h1.innerText = "Movie Not Found !!!";
+    div.append(h1);
+    errmsgDiv.append(div);
+  } else {
+    data.map((elem) => {
+      // console.log(elem);
 
-    let imgDiv = document.createElement("div");
-    imgDiv.setAttribute("class", "imgDiv");
+      let div = document.createElement("div");
+      div.setAttribute("class", "card");
 
-    let img = document.createElement("img");
-    img.setAttribute("class", "image");
-    imgDiv.append(img);
+      let imgDiv = document.createElement("div");
+      imgDiv.setAttribute("class", "imgDiv");
 
-    let pDiv = document.createElement("div");
-    pDiv.setAttribute("class", "pDiv");
+      let img = document.createElement("img");
+      img.setAttribute("class", "image");
+      imgDiv.append(img);
 
-    let date = document.createElement("p");
-    let name = document.createElement("p");
+      let pDiv = document.createElement("div");
+      pDiv.setAttribute("class", "pDiv");
 
-    pDiv.append(name, date);
+      let date = document.createElement("p");
+      let name = document.createElement("p");
 
-    let btn = document.createElement("button");
-    btn.innerText = "Add To playlist";
+      pDiv.append(name, date);
 
-    btn.addEventListener("click", () => {
-      localStorage.setItem("movieData", JSON.stringify(elem));
-      showModal();
+      let btn = document.createElement("button");
+      btn.innerText = "Add To playlist";
+
+      btn.addEventListener("click", () => {
+        localStorage.setItem("movieData", JSON.stringify(elem));
+        showModal();
+      });
+
+      name.innerText = `Title: ${elem.Title}`;
+
+      img.setAttribute("src", elem.Poster);
+
+      date.innerText = `Year: ${elem.Year}`;
+
+      div.append(imgDiv, pDiv, btn);
+
+      container.append(div);
     });
-
-    name.innerText = `Title: ${elem.Title}`;
-
-    img.setAttribute("src", elem.Poster);
-
-    date.innerText = `Year: ${elem.Year}`;
-
-    div.append(imgDiv, pDiv, btn);
-
-    container.append(div);
-  });
+  }
 }
 
 // ******************************Showing user details and logout functionality***********************/

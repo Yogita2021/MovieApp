@@ -134,7 +134,11 @@ li {
   color: black;
   background-color: rgb(86, 136, 86);
 }
+#errMsgh1 {
+  margin-left: 110%;
 
+  margin-top: 50%;
+}
 #container {
   width: 80%;
   /* border: 1px solid red; */
@@ -312,5 +316,10 @@ li {
     top: 25%;
     width: 100%;
     height: 70%;
+  }
+  #errMsgh1 {
+    margin-left: 15%;
+
+    margin-top: 25%;
   }
 }
