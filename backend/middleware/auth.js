@@ -4,10 +4,10 @@ require("dotenv").config();
 
 const auth = async (req, res, next) => {
   try {
-    const token = req.headers.authorization;
-
+    const token = req.headers.authorization || null;
+    // console.log(token);
     if (!token) {
-      return res.status(201).json({ message: "Invalid user" });
+      return res.status(201).json({ isError: true, message: "Invalid user" });
     }
 
     const decode = jwt.decode(token, process.env.Secrete_key);

@@ -10,19 +10,16 @@ userRouter.post("/register", async (req, res) => {
     const { name, email, password } = req.body;
     const user = await User.findOne({ email });
     if (user) {
-      res.status(201).json({ msg: "User already exist !" });
-      return;
-    } else {
-      const hashPassword = bcrypt.hashSync(password, 8);
-      const newUser = new User({ name, email, password: hashPassword });
-      await newUser.save();
-      res
-        .status(200)
-        .json({ isError: false, msg: "New user registered !", user: newUser });
+      return res.status(201).json({ msg: "User already exist !" });
     }
+    const hashPassword = bcrypt.hashSync(password, 8);
+    const newUser = new User({ name, email, password: hashPassword });
+    await newUser.save();
+    return res
+      .status(200)
+      .json({ isError: false, msg: "New user registered !", user: newUser });
   } catch (error) {
     res.status(400).json({ message: error.message });
-    return;
   }
 });
 
@@ -31,13 +28,11 @@ userRouter.post("/login", async (req, res) => {
     const { email, password } = req.body;
     let user = await User.findOne({ email });
     if (!user) {
-      res.status(201).json({ msg: "Please login First!" });
-      return;
+      return res.status(201).json({ msg: "Please login First!" });
     }
     let passCheck = bcrypt.compareSync(password, user.password);
     if (!passCheck) {
-      res.status(201).json({ msg: "wrong credential" });
-      return;
+      return res.status(201).json({ msg: "Wrong credential" });
     }
     let payload = { userName: user.name, userID: user._id };
     const token = jwt.sign(payload, process.env.Secrete_key, {
@@ -48,7 +43,6 @@ userRouter.post("/login", async (req, res) => {
       .send({ msg: "Login successful !", token: token, user: user });
   } catch (error) {
     res.status(400).json({ message: error.message });
-    return;
   }
 });
 

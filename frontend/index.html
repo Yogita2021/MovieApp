@@ -102,28 +102,39 @@
 
           <div class="modal-content2">
 
-                 <span class="close2">&times;</span>
+                 <span class="close2" onclick="closeModal()">&times;</span>
 
                   <h2>Add To Playlist</h2>
 
             <form id="playlistForm2">
 
-                  <label for="playlistName2">Playlist Name:</label> <br />
-
-                  <input type="text" id="playlistName2" required /> <br />
-
                   <label for="playlistType2">Playlist Type:</label> <br />
 
-                  <select id="playlistType2" required>
+                  <select id="playlistType2" >
 
-                  <option value="public2">public</option>
+                    <option value="">Select</option>
 
-                  <option value="private2">private</option>
+                  <option value="PublicPlaylist">public</option>
+
+                  <option value="privatePlaylist">private</option>
 
                   </select>
+
                   <br />
 
-              <button type="submit" id="submitBtn2">Add</button>
+                  <div id="playlists-container" >
+                      <table id="table">
+                        <!-- <th> All List</th> -->
+                         <tr id="playlistNameEl">
+                            
+   
+                         </tr>
+   
+                       </table>
+                    
+                  </div>
+
+              <!-- <button type="submit" id="submitBtn2">Add</button> -->
 
             </form>
 

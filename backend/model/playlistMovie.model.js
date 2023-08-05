@@ -5,6 +5,7 @@ const playlistMoviesSchema = new mongoose.Schema({
   Title: { type: String, required: true },
   Year: { type: String, required: true },
   playlistID: { type: String, required: true },
+  imdbID: { type: String, required: true },
 });
 
 const PlaylistMovieModel = mongoose.model(

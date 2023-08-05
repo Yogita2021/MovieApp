@@ -34,30 +34,26 @@ movieSeacrhForm.addEventListener("submit", async (e) => {
     query: movieSeacrhForm.search.value,
   };
 
-  console.log(searchInput);
+  // console.log(searchInput);
 
-  if (!movieSeacrhForm.search.value) {
-    getAllMovies();
-  } else {
-    try {
-      fetch(`${Base_Url}/movies/search`, {
-        method: "POST",
-        headers: {
-          "content-type": "application/json",
-        },
-        body: JSON.stringify(searchInput),
-      })
-        .then((res) => res.json())
-        .then((data) => {
-          // console.log(data);
+  try {
+    fetch(`${Base_Url}/movies/search`, {
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+      },
+      body: JSON.stringify(searchInput),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
 
-          ApiData = data.data;
+        ApiData = data.data;
 
-          movieCard(ApiData);
-        });
-    } catch (error) {
-      console.log(error);
-    }
+        movieCard(ApiData);
+      });
+  } catch (error) {
+    console.log(error);
   }
 });
 
@@ -108,6 +104,7 @@ function movieCard(data) {
     btn.innerText = "Add To playlist";
 
     btn.addEventListener("click", () => {
+      localStorage.setItem("movieData", JSON.stringify(elem));
       showModal();
     });
 
@@ -122,6 +119,7 @@ function movieCard(data) {
     container.append(div);
   });
 }
+
 // ******************************Showing user details and logout functionality***********************/
 
 let Login = document.getElementById("Login");
@@ -191,9 +189,9 @@ playlistform.addEventListener("submit", (e) => {
 
     .then((data) => {
       if (!data.isErrer) {
-        alert("Playlist created successfully!");
+        // alert("Playlist created successfully!");
+        window.location.href = "./htmlFiles/playlist.html";
         // console.log(data);
-        console.log("New Playlist:", data.playlist);
       } else {
         alert("Failed to create playlist.");
         return;
@@ -210,11 +208,13 @@ var btn = document.getElementById("myBtn");
 var span = document.getElementsByClassName("close")[0];
 
 btn.onclick = function () {
+  btn.style.background = "green";
   modal.style.display = "block";
 };
 
 span.onclick = function () {
   modal.style.display = "none";
+  btn.style.background = "white";
 };
 
 window.onclick = function (event) {
@@ -224,7 +224,9 @@ window.onclick = function (event) {
 };
 
 // **************************************modal2 javascript********************************/
+
 function showModal() {
+  // btn.style.background = "green";
   const modal2 = document.getElementById("myModal2");
 
   modal2.style.display = "block";
@@ -241,13 +243,108 @@ const playlistForm2 = document.getElementById("playlistForm2");
 playlistForm2.addEventListener("submit", (event) => {
   event.preventDefault();
 
-  const playlistName2 = document.getElementById("playlistName2").value;
+  // const playlistType2 = document.getElementById("playlistType2").value;
 
-  const playlistType2 = document.getElementById("playlistType2").value;
-
-  console.log("Playlist Name:", playlistName2);
-
-  console.log("Playlist Type:", playlistType2);
-
+  // console.log("Playlist Type:", playlistType2);
   closeModal();
 });
+
+// ********************for getting list of public playlist And Private by select tag*********************/
+
+let option = document.getElementById("playlistType2");
+
+option.addEventListener("change", () => {
+  let target = option.value;
+  if (target == "PublicPlaylist") {
+    fetch(`${Base_Url}/playlist/${target}`)
+      .then((res) => res.json())
+
+      .then((data) => {
+        // console.log(data.PublicPlaylist);
+
+        if (!data.isError) {
+          displayPlaylists(data.PublicPlaylist);
+        } else {
+          alert(data.message);
+          playlistsContainer.innerHTML = null;
+        }
+      })
+      .catch((err) => console.log(err));
+  } else {
+    const token = localStorage.getItem("token");
+
+    if (!token) {
+      alert("Please log in to view your playlists.");
+
+      window.location.href = "./htmlFiles/login.html";
+    }
+
+    fetch(`${Base_Url}/playlist/${target}`, {
+      method: "GET",
+      headers: {
+        Authorization: token,
+      },
+    })
+      .then((res) => res.json())
+
+      .then((data) => {
+        //   console.log(data);
+
+        console.log(data.PrivatePlaylist);
+
+        if (!data.isError) {
+          displayPlaylists(data.PrivatePlaylist);
+        } else {
+          alert("Failed to fetch PrivatePlaylist.");
+        }
+      })
+      .catch((err) => console.log(err));
+  }
+});
+
+// *****************************display playlist in the table format*******************************/
+
+const playlistNameEl = document.getElementById("playlistNameEl");
+
+function displayPlaylists(playlists) {
+  playlistNameEl.innerHTML = "";
+
+  playlists.forEach((playlist) => {
+    const playlistDiv = document.createElement("tr");
+
+    playlistDiv.classList.add("playlist-item");
+
+    playlistDiv.innerHTML = `
+<tr>${playlist.name}</tr>
+    `;
+
+    playlistDiv.addEventListener("click", () => {
+      playlistDiv.style.backgroundColor = "green";
+      playlistDiv.style.cursor = "pointer";
+      let id = playlist._id;
+      let movie = JSON.parse(localStorage.getItem("movieData"));
+      let obj = {
+        Poster: movie.Poster,
+        Title: movie.Title,
+        Type: movie.Type,
+        Year: movie.Year,
+        imdbID: movie.imdbID,
+      };
+      console.log(movie);
+      fetch(`${Base_Url}/playlist/addMovie/${id}`, {
+        method: "POST",
+        headers: {
+          "content-type": "application/json",
+        },
+        body: JSON.stringify(obj),
+      })
+        .then((res) => res.json())
+        .then((data) => {
+          alert("movie added to playlist");
+          window.location.href = "./index.html";
+        });
+    });
+
+    playlistNameEl.appendChild(playlistDiv);
+  });
+}

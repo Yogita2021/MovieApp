@@ -43,6 +43,7 @@ header {
 
 li {
   text-decoration: none;
+  list-style: none;
 }
 
 .navbar form > input {
@@ -56,6 +57,11 @@ li {
   font-size: 20px;
   font-weight: 700;
   text-decoration: none;
+}
+#Login {
+  padding: 10px;
+  border-radius: 5px;
+  border: none;
 }
 
 #menu-icon {
@@ -86,43 +92,67 @@ li {
   /* border: 1px solid black; */
   width: 10%;
   background-color: rgb(98, 98, 253);
-  height: 92vh;
+  /* height: 92vh; */
 }
 
 #second-contaier {
   display: flex;
-  flex-direction: column;
+  /* flex-direction: column; */
   width: 90%;
   /* border: 1px solid blue; */
 }
 
 #playlists-container {
   display: flex;
-  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+  width: 30%;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 5%;
+  /* border: 1px solid red; */
+  /* box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px; */
 }
+/* #playlists-container > div {
+  border: 1px solid red;
+} */
 
 .playlist-item {
   /* border: 1px solid red; */
-  padding: 30px 50px;
+  padding: 10px;
+  width: 50%;
+
   box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
-  background-color: rgb(221, 246, 255);
-  margin: 20px;
+  background-color: green;
+  color: white;
+  text-align: center;
+  cursor: Pointer;
+
+  margin: 10px;
   border-radius: 5px;
+}
+.playlist-item :hover {
+  font-size: 15px;
+  color: black;
+  background-color: rgb(86, 136, 86);
 }
 
 #container {
-  width: 90%;
-  margin: auto;
+  width: 80%;
+  /* border: 1px solid red; */
+  margin-top: 5%;
+  height: 615px;
+  /* display: flex; */
   display: grid;
-  grid-template-columns: repeat(5, 1fr);
+  grid-template-columns: repeat(4, 1fr);
   grid-template-rows: auto;
   gap: 20px;
   padding: 10px;
+  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
 }
 
 #container > div {
   background-color: rgb(221, 246, 255);
   border-radius: 10px;
+  height: 400px;
   /* border: 1px solid black; */
   box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px,
     rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
@@ -149,8 +179,16 @@ li {
 #container > div button {
   padding: 10px 20px;
   border-radius: 10px;
-  background-color: rgb(98, 98, 253);
+  font-size: 14px;
+  background-color: rgb(5, 155, 5);
+  color: white;
+
   border: none;
+}
+
+#container > div button:hover {
+  background-color: rgb(77, 168, 77);
+  color: black;
 }
 
 /* ********************************** Responsivnness for mobile view*********************** */
@@ -213,25 +251,34 @@ li {
   }
 
   #container {
-    width: 90%;
+    width: 100%;
+    /* height: 5000px; */
+
     grid-template-columns: repeat(2, 1fr);
     grid-template-rows: auto;
     gap: 20px;
     padding: 10px;
   }
+  #main {
+    display: flex;
+    flex-direction: column;
+  }
 
   #second-contaier {
     display: flex;
     flex-direction: column;
-    /* width: 90%; */
+    width: 100%;
     /* border: 1px solid blue; */
   }
 
   #playlists-container {
     display: flex;
     flex-direction: column;
+    width: 100%;
     box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
+    /* border: 1px solid red; */
   }
+
   .pDiv {
     padding: 10px;
     height: 100px;

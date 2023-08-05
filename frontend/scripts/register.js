@@ -4,8 +4,6 @@ const Base_Url = "http://localhost:8000";
 
 // ***************************Register  functionality***************************************/
 
-let userDetails = JSON.parse(localStorage.getItem("userDetails")) || {};
-
 let nameEl = document.getElementById("name");
 
 let email = document.getElementById("email");

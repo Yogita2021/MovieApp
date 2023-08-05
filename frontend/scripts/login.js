@@ -32,9 +32,11 @@ form.addEventListener("submit", (e) => {
 
       // alert(data.msg);
       if (data.msg == "Login successful !") {
+        localStorage.setItem("token", data.token);
         window.location.href = "../index.html";
+      } else {
+        alert("Invalid credential");
       }
-      localStorage.setItem("token", data.token);
     })
     .catch((err) => console.log(err));
 });

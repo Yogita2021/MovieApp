@@ -80,6 +80,7 @@ privateBtn.addEventListener("click", function privatePlaylists() {
 
       if (!data.isError) {
         displayPlaylists(data.PrivatePlaylist);
+        onlyOnePlaylist(data.PublicPlaylist[0]._id);
       } else {
         alert("Failed to fetch PrivatePlaylist.");
       }
@@ -101,9 +102,21 @@ function displayPlaylists(playlists) {
       <h3>${playlist.name}</h3>
      
     `;
+    playlistDiv.addEventListener("click", () => {
+      onlyOnePlaylist(playlist._id);
+    });
 
     playlistsContainer.appendChild(playlistDiv);
   });
+}
+// **************For default fetching In the Default public playlist***************************/
+function onlyOnePlaylist(playlistid) {
+  fetch(`${Base_Url}/playlist/getMovie/${playlistid}`)
+    .then((res) => res.json())
+    .then((data) => {
+      // console.log(data);
+      movieCard(data.data);
+    });
 }
 
 // ****************************** for getting public playlist***************************/
@@ -122,6 +135,7 @@ function viewPublicPlaylists() {
 
       if (!data.isError) {
         displayPlaylists(data.PublicPlaylist);
+        onlyOnePlaylist(data.PublicPlaylist[0]._id);
       } else {
         alert("Failed to fetch PublicPlaylist.");
       }
@@ -131,25 +145,24 @@ function viewPublicPlaylists() {
 
 // *******************************getting Default movies*******************************/
 
-function getAllMovies() {
-  fetch(`${Base_Url}/movies/`)
-    .then((res) => res.json())
+// function getAllMovies() {
+//   fetch(`${Base_Url}/movies/`)
+//     .then((res) => res.json())
 
-    .then((data) => {
-      // console.log(data);
+//     .then((data) => {
+//       // console.log(data);
 
-      ApiData = data.data;
+//       ApiData = data.data;
 
-      movieCard(ApiData);
-    })
-    .catch((error) => {
-      console.log(error);
-    });
-}
+//       movieCard(ApiData);
+//     })
+//     .catch((error) => {
+//       console.log(error);
+//     });
+// }
 
 window.onload = function () {
   viewPublicPlaylists();
-  getAllMovies();
 };
 
 // ************************************display movie card************************************/
@@ -179,7 +192,7 @@ function movieCard(data) {
     pDiv.append(name, date);
 
     let btn = document.createElement("button");
-    btn.innerText = "View";
+    btn.innerText = "Watch Now";
 
     name.innerText = `Title: ${elem.Title}`;
 
@@ -207,26 +220,22 @@ movieSeacrhForm.addEventListener("submit", async (e) => {
     query: movieSeacrhForm.search.value,
   };
 
-  console.log(searchInput);
+  // console.log(searchInput);
 
-  if (!movieSeacrhForm.search.value) {
-    getAllMovies();
-  } else {
-    fetch(`${Base_Url}/movies/search`, {
-      method: "POST",
-      headers: {
-        "content-type": "application/json",
-      },
-      body: JSON.stringify(searchInput),
+  fetch(`${Base_Url}/movies/search`, {
+    method: "POST",
+    headers: {
+      "content-type": "application/json",
+    },
+    body: JSON.stringify(searchInput),
+  })
+    .then((res) => res.json())
+    .then((data) => {
+      // console.log(data);
+      console.log(data.data);
+      ApiData = data.data;
+
+      movieCard(ApiData);
     })
-      .then((res) => res.json())
-      .then((data) => {
-        // console.log(data);
-        // console.log(data.data);
-        ApiData = data.data;
-
-        movieCard(ApiData);
-      })
-      .catch((error) => connsole.log(error));
-  }
+    .catch((error) => connsole.log(error));
 });

@@ -29,12 +29,23 @@ playlistRouter.post("/create", auth, async (req, res) => {
 
 // for adding movie to the playlist
 
-playlistRouter.post("/addMovie/:playlistID", auth, async (req, res) => {
+playlistRouter.post("/addMovie/:playlistID", async (req, res) => {
   try {
     const { playlistID } = req.params;
+    // console.log(req.body);
     const data = new PlaylistMovieModel({ ...req.body, playlistID });
     await data.save();
     res.status(200).json({ msg: "Added to the playlist", data });
+  } catch (error) {
+    res.status(400).json({ message: error.message });
+  }
+});
+
+playlistRouter.get("/getMovie/:id", async (req, res) => {
+  try {
+    const { id } = req.params;
+    const data = await PlaylistMovieModel.find({ playlistID: id });
+    res.status(200).send({ data });
   } catch (error) {
     res.status(400).json({ message: error.message });
   }
@@ -51,7 +62,6 @@ playlistRouter.get("/privatePlaylist", auth, async (req, res) => {
 
     res.status(200).json({ isError: false, PrivatePlaylist });
   } catch (error) {
-    console.error("Error fetching playlists:", error);
     res.status(500).json({
       isError: true,
       message: "An error occurred while fetching playlists",
@@ -69,7 +79,6 @@ playlistRouter.get("/PublicPlaylist", async (req, res) => {
 
     res.status(200).json({ isError: false, PublicPlaylist });
   } catch (error) {
-    console.error("Error fetching playlists:", error);
     res.status(500).json({
       isError: true,
       message: "An error occurred while fetching playlists",
