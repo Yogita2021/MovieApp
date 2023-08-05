@@ -1,6 +1,8 @@
 // ******************************baseUrl**********************************************/
 
-const Base_Url = "http://localhost:8000";
+// const Base_Url = "http://localhost:8000";
+
+const Base_Url = "https://movieapp-1979.onrender.com/";
 
 // ***************************Login functionality***************************************/
 

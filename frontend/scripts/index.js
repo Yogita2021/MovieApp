@@ -1,6 +1,8 @@
 // ******************************baseUrl**********************************************/
 
-const Base_Url = "http://localhost:8000";
+// const Base_Url = "http://localhost:8000";
+
+const Base_Url = "https://movieapp-1979.onrender.com/";
 
 /************************************Nav js for responsivness*********************** */
 
@@ -37,7 +39,7 @@ movieSeacrhForm.addEventListener("submit", async (e) => {
   // console.log(searchInput);
 
   try {
-    fetch(`${Base_Url}/movies/search`, {
+    fetch(`${Base_Url}movies/search`, {
       method: "POST",
       headers: {
         "content-type": "application/json",
@@ -59,7 +61,7 @@ movieSeacrhForm.addEventListener("submit", async (e) => {
 
 //*******************************************get All the Movies************************** */
 function getAllMovies() {
-  fetch(`${Base_Url}/movies/`)
+  fetch(`${Base_Url}movies/`)
     .then((res) => res.json())
     .then((data) => {
       console.log(data);
@@ -188,7 +190,7 @@ playlistform.addEventListener("submit", (e) => {
 
   // console.log(obj);
 
-  fetch(`${Base_Url}/playlist/create`, {
+  fetch(`${Base_Url}playlist/create`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -268,7 +270,7 @@ let option = document.getElementById("playlistType2");
 option.addEventListener("change", () => {
   let target = option.value;
   if (target == "PublicPlaylist") {
-    fetch(`${Base_Url}/playlist/${target}`)
+    fetch(`${Base_Url}playlist/${target}`)
       .then((res) => res.json())
 
       .then((data) => {
@@ -291,7 +293,7 @@ option.addEventListener("change", () => {
       window.location.href = "./htmlFiles/login.html";
     }
 
-    fetch(`${Base_Url}/playlist/${target}`, {
+    fetch(`${Base_Url}playlist/${target}`, {
       method: "GET",
       headers: {
         Authorization: token,
@@ -343,7 +345,7 @@ function displayPlaylists(playlists) {
         imdbID: movie.imdbID,
       };
       console.log(movie);
-      fetch(`${Base_Url}/playlist/addMovie/${id}`, {
+      fetch(`${Base_Url}playlist/addMovie/${id}`, {
         method: "POST",
         headers: {
           "content-type": "application/json",

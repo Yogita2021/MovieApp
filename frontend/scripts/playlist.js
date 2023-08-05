@@ -1,3 +1,8 @@
+// ******************************baseUrl**********************************************/
+
+// const Base_Url = "http://localhost:8000";
+const Base_Url = "https://movieapp-1979.onrender.com/";
+
 /************************************Nav js for responsivness*********************** */
 
 let header = document.querySelector("header");
@@ -14,10 +19,6 @@ menu.onclick = () => {
 window.onscroll = () => {
   navbar.classList.remove("active");
 };
-
-// ******************************baseUrl**********************************************/
-
-const Base_Url = "http://localhost:8000";
 
 // ****************************navbar js for userDetails and logout functionality********************************/
 
@@ -65,7 +66,7 @@ privateBtn.addEventListener("click", function privatePlaylists() {
     return;
   }
 
-  fetch(`${Base_Url}/playlist/privatePlaylist`, {
+  fetch(`${Base_Url}playlist/privatePlaylist`, {
     method: "GET",
     headers: {
       Authorization: token,
@@ -111,7 +112,7 @@ function displayPlaylists(playlists) {
 }
 // **************For default fetching In the Default public playlist***************************/
 function onlyOnePlaylist(playlistid) {
-  fetch(`${Base_Url}/playlist/getMovie/${playlistid}`)
+  fetch(`${Base_Url}playlist/getMovie/${playlistid}`)
     .then((res) => res.json())
     .then((data) => {
       // console.log(data);
@@ -126,7 +127,7 @@ const publicBtn = document.getElementById("publicBtn");
 publicBtn.addEventListener("click", viewPublicPlaylists);
 
 function viewPublicPlaylists() {
-  fetch(`${Base_Url}/playlist/PublicPlaylist`)
+  fetch(`${Base_Url}playlist/PublicPlaylist`)
     .then((res) => res.json())
 
     .then((data) => {
@@ -142,24 +143,6 @@ function viewPublicPlaylists() {
     })
     .catch((err) => console.log(err));
 }
-
-// *******************************getting Default movies*******************************/
-
-// function getAllMovies() {
-//   fetch(`${Base_Url}/movies/`)
-//     .then((res) => res.json())
-
-//     .then((data) => {
-//       // console.log(data);
-
-//       ApiData = data.data;
-
-//       movieCard(ApiData);
-//     })
-//     .catch((error) => {
-//       console.log(error);
-//     });
-// }
 
 window.onload = function () {
   viewPublicPlaylists();
@@ -234,7 +217,7 @@ movieSeacrhForm.addEventListener("submit", async (e) => {
 
   // console.log(searchInput);
 
-  fetch(`${Base_Url}/movies/search`, {
+  fetch(`${Base_Url}movies/search`, {
     method: "POST",
     headers: {
       "content-type": "application/json",
