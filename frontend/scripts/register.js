@@ -1,6 +1,8 @@
 // ******************************baseUrl**********************************************/
 
-const Base_Url = "http://localhost:8000";
+// const Base_Url = "http://localhost:8000";
+
+const Base_Url = "https://movieapp-1979.onrender.com/";
 
 // ***************************Register  functionality***************************************/
 
@@ -22,7 +24,7 @@ form.addEventListener("submit", (e) => {
     password: password.value,
   };
 
-  fetch(`${Base_Url}/user/register`, {
+  fetch(`${Base_Url}user/register`, {
     method: "POST",
     headers: {
       "Content-type": "application/json",

@@ -20,7 +20,7 @@ form.addEventListener("submit", (e) => {
     password: password.value,
   };
 
-  fetch(`${Base_Url}/user/login`, {
+  fetch(`${Base_Url}user/login`, {
     method: "POST",
     headers: {
       "Content-type": "application/json",
