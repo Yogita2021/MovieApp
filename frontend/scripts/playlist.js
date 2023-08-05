@@ -81,7 +81,7 @@ privateBtn.addEventListener("click", function privatePlaylists() {
 
       if (!data.isError) {
         displayPlaylists(data.PrivatePlaylist);
-        onlyOnePlaylist(data.PublicPlaylist[0]._id);
+        onlyOnePlaylist(data.PrivatePlaylist[0]._id);
       } else {
         alert("Failed to fetch PrivatePlaylist.");
       }
