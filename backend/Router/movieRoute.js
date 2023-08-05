@@ -17,7 +17,9 @@ movieRouter.post("/search", async (req, res) => {
     if (!apidata.ok) {
       throw new Error("Failed to fetch data from the OMDB API.");
     }
+
     const data = await apidata.json();
+    // console.log(data);
     const searchResults =
       data.Search && Array.isArray(data.Search)
         ? data.Search.filter((movie) => {
