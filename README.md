@@ -76,12 +76,24 @@ It's a Movie App website inn which user can create his/her Public or private pla
 
 ## Home Page
 
+![image](./frontend/Images/homePage.png)
+
 ## Registeration Page
+
+![image](./frontend/Images/register.png)
 
 ## Login Page
 
+![image](./frontend/Images/login.png)
+
 ## Create Playlist
+
+![image](./frontend/Images/createPlaylist.png)
 
 ## Add Movie to the playlist
 
+![image](./frontend/Images/addToplaylist.png)
+
 ## View All the Playlist Information
+
+![image](./frontend/Images/publicPlaylist.png)
