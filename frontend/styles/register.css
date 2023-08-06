@@ -72,3 +72,11 @@
   display: block;
   margin: 30px auto 10px;
 }
+
+/* resonsivness */
+@media (max-width: 768px) {
+  .input-group label {
+    flex-basis: 28%;
+    margin-right: 10px;
+  }
+}
