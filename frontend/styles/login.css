@@ -79,4 +79,15 @@
     flex-basis: 28%;
     margin-right: 10px;
   }
+
+  .input-group input {
+    flex-basis: 68%;
+    background: transparent;
+    border: 0;
+    outline: none;
+    padding: 10px 0;
+    /* border-bottom: 1px solid #999; */
+    color: #333;
+    font-size: 16px;
+  }
 }
