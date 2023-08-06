@@ -2,7 +2,7 @@
 
 It's a Movie App website inn which user can create his/her Public or private playlist , add movies innto it and also see the perticular playlist information.
 
-# Frontend Deployed Link :-
+# Frontend Deployed Link :- https://64cf395b17e8c41db748a3ad--velvety-bunny-6808fd.netlify.app/
 
 # Backend Deployed Link :- https://movieapp-1979.onrender.com/
 
