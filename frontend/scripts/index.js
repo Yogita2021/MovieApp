@@ -51,88 +51,12 @@ movieSeacrhForm.addEventListener("submit", async (e) => {
         console.log(data);
 
         ApiData = data.data;
-
-        movieCard(ApiData);
+        displayMovies(ApiData);
       });
   } catch (error) {
     console.log(error);
   }
 });
-
-//*******************************************get All the Movies************************** */
-function getAllMovies() {
-  fetch(`${Base_Url}movies/`)
-    .then((res) => res.json())
-    .then((data) => {
-      console.log(data);
-
-      ApiData = data.data;
-
-      movieCard(ApiData);
-    })
-    .catch((error) => {
-      console.log(error);
-    });
-}
-
-window.onload = getAllMovies;
-
-// ****************************************All Card created here*********************************/
-
-let errmsgDiv = document.getElementById("errmsgDiv");
-function movieCard(data) {
-  container.innerHTML = "";
-  errmsgDiv.innerHTML = "";
-  if (data.length == 0) {
-    let div = document.createElement("div");
-    div.setAttribute("id", "errMsg");
-    let h1 = document.createElement("h1");
-    h1.setAttribute("id", "errMsgh1");
-    h1.innerText = "Movie Not Found !!!";
-    div.append(h1);
-    errmsgDiv.append(div);
-  } else {
-    data.map((elem) => {
-      // console.log(elem);
-
-      let div = document.createElement("div");
-      div.setAttribute("class", "card");
-
-      let imgDiv = document.createElement("div");
-      imgDiv.setAttribute("class", "imgDiv");
-
-      let img = document.createElement("img");
-      img.setAttribute("class", "image");
-      imgDiv.append(img);
-
-      let pDiv = document.createElement("div");
-      pDiv.setAttribute("class", "pDiv");
-
-      let date = document.createElement("p");
-      let name = document.createElement("p");
-
-      pDiv.append(name, date);
-
-      let btn = document.createElement("button");
-      btn.innerText = "Add To playlist";
-
-      btn.addEventListener("click", () => {
-        localStorage.setItem("movieData", JSON.stringify(elem));
-        showModal();
-      });
-
-      name.innerText = `Title: ${elem.Title}`;
-
-      img.setAttribute("src", elem.Poster);
-
-      date.innerText = `Year: ${elem.Year}`;
-
-      div.append(imgDiv, pDiv, btn);
-
-      container.append(div);
-    });
-  }
-}
 
 // ******************************Showing user details and logout functionality***********************/
 
@@ -362,3 +286,94 @@ function displayPlaylists(playlists) {
     playlistNameEl.appendChild(playlistDiv);
   });
 }
+
+//***************for paginated data************ */
+let errmsgDiv = document.getElementById("errmsgDiv");
+const moviesDiv = document.getElementById("container");
+const prevBtn = document.getElementById("prevBtn");
+const nextBtn = document.getElementById("nextBtn");
+let currentPage = 1;
+
+const fetchMovies = async (page) => {
+  try {
+    const response = await fetch(`${Base_Url}movies/movie/?page=${page}`);
+    const data = await response.json();
+    console.log(data);
+    return data;
+  } catch (error) {
+    console.error("Error fetching movies:", error);
+    return [];
+  }
+};
+
+const displayMovies = (movies) => {
+  moviesDiv.innerHTML = "";
+  errmsgDiv.innerHTML = "";
+  if (movies.length == 0) {
+    let div = document.createElement("div");
+    div.setAttribute("id", "errMsg");
+    let h1 = document.createElement("h1");
+    h1.setAttribute("id", "errMsgh1");
+    h1.innerText = "Movie Not Found !!!";
+    div.append(h1);
+    errmsgDiv.append(div);
+  } else {
+    movies.forEach((elem) => {
+      // const movieDiv = document.createElement("div");
+      // movieDiv.textContent = movie.Title;
+      // moviesDiv.appendChild(movieDiv);
+      let div = document.createElement("div");
+      div.setAttribute("class", "card");
+
+      let imgDiv = document.createElement("div");
+      imgDiv.setAttribute("class", "imgDiv");
+
+      let img = document.createElement("img");
+      img.setAttribute("class", "image");
+      imgDiv.append(img);
+
+      let pDiv = document.createElement("div");
+      pDiv.setAttribute("class", "pDiv");
+
+      let date = document.createElement("p");
+      let name = document.createElement("p");
+
+      pDiv.append(name, date);
+
+      let btn = document.createElement("button");
+      btn.innerText = "Add To playlist";
+
+      btn.addEventListener("click", () => {
+        localStorage.setItem("movieData", JSON.stringify(elem));
+        showModal();
+      });
+
+      name.innerText = `Title: ${elem.Title}`;
+
+      img.setAttribute("src", elem.Poster);
+
+      date.innerText = `Year: ${elem.Year}`;
+
+      div.append(imgDiv, pDiv, btn);
+
+      moviesDiv.append(div);
+    });
+  }
+};
+
+const loadMovies = async (page) => {
+  const movies = await fetchMovies(page);
+  displayMovies(movies);
+};
+
+prevBtn.addEventListener("click", () => {
+  currentPage = Math.max(1, currentPage - 1);
+  loadMovies(currentPage);
+});
+
+nextBtn.addEventListener("click", () => {
+  currentPage += 1;
+  loadMovies(currentPage);
+});
+
+window.onload = loadMovies(currentPage);

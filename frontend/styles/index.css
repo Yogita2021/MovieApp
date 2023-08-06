@@ -115,11 +115,20 @@ li {
   width: 60%;
 }
 
-#errMsgh1 {
-  margin-left: 250%;
-
-  margin-top: 100%;
-  margin-bottom: 140%;
+#errMsg {
+  /* border: 20px solid red; */
+  width: 100%;
+  text-align: center;
+  margin: 100% 0% 60% 120%;
+}
+#container {
+  width: 90%;
+  margin: auto;
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  grid-template-rows: auto;
+  gap: 20px;
+  /* padding: 10px; */
 }
 #container > div button {
   padding: 10px 20px;
@@ -131,6 +140,32 @@ li {
 }
 #container > div button:hover {
   background-color: rgb(77, 168, 77);
+  color: black;
+}
+#PaginnationDiv {
+  /* border: 1px solid red; */
+  width: 20%;
+  margin: auto;
+  padding: 10px;
+  margin-bottom: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 50px;
+}
+
+#PaginnationDiv button {
+  padding: 15px 25px;
+  font-size: 14px;
+  border-radius: 5px;
+  background-color: rgb(86, 86, 255);
+  border: none;
+  color: white;
+  cursor: pointer;
+}
+
+#PaginnationDiv button:hover {
+  background-color: rgb(151, 151, 239);
   color: black;
 }
 
@@ -405,12 +440,13 @@ tr:nth-child(even) {
   .image {
     width: 60%;
   }
-  #errMsgh1 {
-    margin-left: 15%;
-
-    margin-top: 25%;
+  #errMsg {
+    /* border: 20px solid red; */
+    text-align: center;
+    width: 100%;
+    /* margin: auto; */
+    margin: 40% 0% 20% 0%;
   }
-
   #container > div button {
     margin-top: 10px;
   }

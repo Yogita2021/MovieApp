@@ -52,6 +52,24 @@ movieRouter.get("/", async (req, res) => {
   }
 });
 
+// route for pagination
+movieRouter.get("/movie", async (req, res) => {
+  const page = req.query.page || 1;
+  try {
+    const { default: fetch } = await import("node-fetch");
+    const response = await fetch(
+      `http://www.omdbapi.com/?apikey=${process.env.Api_Key}&s=all&page=${page}`
+    );
+    const data = await response.json();
+    // console.log(data);
+    res.json(data.Search);
+  } catch (error) {
+    console.error("Error fetching data from OMDB API:", error);
+    res.status(500).json({ error: "Internal Server Error" });
+  }
+});
+
+//
 movieRouter.get("/:id", async (req, res) => {
   try {
     const { id } = req.params;
