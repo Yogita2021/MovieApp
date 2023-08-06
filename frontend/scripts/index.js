@@ -290,6 +290,7 @@ function displayPlaylists(playlists) {
 //***************for paginated data************ */
 let errmsgDiv = document.getElementById("errmsgDiv");
 const moviesDiv = document.getElementById("container");
+const paginationDiv = document.getElementById("PaginnationDiv");
 const prevBtn = document.getElementById("prevBtn");
 const nextBtn = document.getElementById("nextBtn");
 let currentPage = 1;
@@ -317,6 +318,7 @@ const displayMovies = (movies) => {
     h1.innerText = "Movie Not Found !!!";
     div.append(h1);
     errmsgDiv.append(div);
+    paginationDiv.innerHTML = "";
   } else {
     movies.forEach((elem) => {
       // const movieDiv = document.createElement("div");
