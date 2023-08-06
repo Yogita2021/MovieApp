@@ -1,6 +1,6 @@
 # [MovieApp]
 
-It's a Movie App website inn which user can create his/her Public or private playlist , add movies innto it and also see the perticular playlist information.
+It's a Movie App website in which user can create Public or private playlist , add movies into it and also see the particular playlist information.
 
 **Frontend Deployed Link:** https://64cf474ddad64a26482baa0e--playful-macaron-7e59bc.netlify.app/
 
@@ -57,7 +57,7 @@ It's a Movie App website inn which user can create his/her Public or private pla
 
 - Authentication using JWT
 - Routes for get all the movies, search movies by its title , create playlist , Add movie to the playlist , sign up and login ,get movies from  
-  perticular Playlist
+  particular Playlist
 
 ## Database
 
@@ -66,11 +66,12 @@ It's a Movie App website inn which user can create his/her Public or private pla
 ## Features
 
 - User can able to login and signup
-- User can search perticular movie
+- User can search particular movie
 - User can create both public and private playlists
-- User can able to Add movie to playlists
-- User can see all the movies from perticular playlist
+- User can able to Add movie to the playlists
+- User can see all the movies from particular playlist
 - Only authorized user can see private playlist
+- Responsive for mobile view
 
 <br>
 
